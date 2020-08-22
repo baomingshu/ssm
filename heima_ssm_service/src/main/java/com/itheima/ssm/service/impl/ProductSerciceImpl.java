@@ -13,12 +13,19 @@ import com.itheima.ssm.service.IProductService;
 @Service
 @Transactional
 public class ProductSerciceImpl implements IProductService{
+	
 	@Autowired
 	private IProductDao productDao;
+	
 	@Override
 	public List<Product> findAll() throws Exception {
-		
-		return productDao.findAll();
+		List<Product> productList = productDao.findAll();
+		return productList;
+	}
+	
+	@Override
+	public void save(Product product) throws Exception {
+		productDao.save(product);
 	}
 
 }
