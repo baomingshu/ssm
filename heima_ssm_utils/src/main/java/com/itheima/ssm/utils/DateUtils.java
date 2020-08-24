@@ -9,6 +9,7 @@ public class DateUtils {
     //日期转换成字符串
     public static String date2String(Date date, String patt) {
         SimpleDateFormat sdf = new SimpleDateFormat(patt);
+//        fomat 格式化
         String format = sdf.format(date);
         return format;
     }
@@ -16,6 +17,7 @@ public class DateUtils {
     //字符串转换成日期
     public static Date string2Date(String str, String patt) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat(patt);
+//       parse  解析，分析
         Date parse = sdf.parse(str);
         return parse;
     }

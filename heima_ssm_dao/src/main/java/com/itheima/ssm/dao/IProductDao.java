@@ -9,7 +9,12 @@ import com.itheima.ssm.domain.Product;
 
 public interface IProductDao {
 	
-	@Select("select* from product")
+//	根据id查询产品
+	@Select("select * from product where id =#{id}")
+	public Product findById(int id)throws Exception;
+	
+//	查询所有的产品信息
+	@Select("select * from product")
 	public List<Product> findAll()throws Exception;
 	
 	@Insert("insert into product(productNum,productName,"
