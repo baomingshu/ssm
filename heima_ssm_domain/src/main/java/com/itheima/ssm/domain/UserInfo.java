@@ -54,6 +54,7 @@ public class UserInfo {
     }
 
     public int getStatus() {
+   
         return status;
     }
 
@@ -62,10 +63,20 @@ public class UserInfo {
     }
 
     public String getStatusStr() {
+    	
+     	
+    	if (status ==0 ){
+    		statusStr = "未开启";
+    	}else if (status==1){
+    		statusStr = "开启";
+    	}
         return statusStr;
     }
 
     public void setStatusStr(String statusStr) {
+    	
+    
+    	
         this.statusStr = statusStr;
     }
 

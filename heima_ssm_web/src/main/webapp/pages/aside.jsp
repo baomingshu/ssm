@@ -41,6 +41,10 @@
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li id="system-setting"><a
+						href="${pageContext.request.contextPath}/customerservice/findAll.do"> <i
+							class="fa fa-circle-o"></i> 客服管理
+					</a></li>
+					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/permission/findAll.do">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>

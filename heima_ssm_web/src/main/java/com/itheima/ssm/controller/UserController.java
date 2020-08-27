@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
+import com.itheima.ssm.domain.Orders;
 import com.itheima.ssm.domain.UserInfo;
 import com.itheima.ssm.service.IUserService;
 
@@ -19,7 +20,18 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	
+	//用户添加
+    @RequestMapping("/save.do")
+    public String save(UserInfo userInfo) throws Exception {
+        System.out.println("userInfo :" +userInfo);
+        if(userInfo!=null){
+        	System.out.println("userInfo.getUsername() "+userInfo.getUsername());
+        	System.out.println("userInfo.getPassword() "+userInfo.getPassword());
+        }
+    	userService.save(userInfo);
+        return "redirect:findAll.do";
+    }
+
 	
 	@RequestMapping("/findAll.do")
 	public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") int page,
@@ -35,5 +47,21 @@ public class UserController {
 		mv.setViewName("user-page-list");
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping("/findById.do")
+//	查询订单详细数据
+//    使用@RequestParam，请求得到前端的参数page和size
+    public ModelAndView findById(@RequestParam(name = "id", required = true) String userId) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        第20行使用了autowired注解方式创建了对象，在这里调用了service的findById方法，拿到了订单的详细数据
+        UserInfo users = userService.findById(userId);
+//       mv调用addObject方法将查询到的订单的详细数据所有数据传给前台，例如orders-show.jsp文件第106行"orders.orderNum"
+        mv.addObject("user",users);
+      //mv.setViewName(),指定了前台文件为orders-show，前台页面跳转到orders-show.jsp
+        mv.setViewName("user-show");
+        return mv;
+    }
 	
 }

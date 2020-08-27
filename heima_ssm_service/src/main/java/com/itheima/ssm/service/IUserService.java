@@ -1,16 +1,14 @@
 package com.itheima.ssm.service;
 
-import java.util.List;
-
+import com.itheima.ssm.domain.UserInfo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.itheima.ssm.domain.Orders;
-import com.itheima.ssm.domain.UserInfo;
-
-
+import java.util.List;
 
 public interface IUserService extends UserDetailsService {
+    List<UserInfo> findAll(int page,int size) throws Exception;
 
-	List<UserInfo> findAll(int page,int size) throws Exception;
-	UserInfo findById(String userId) throws Exception;
+    void save(UserInfo userInfo) throws Exception;
+
+    UserInfo findById(String id) throws Exception;
 }
