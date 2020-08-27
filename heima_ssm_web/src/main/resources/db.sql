@@ -43,28 +43,7 @@ CREATE TABLE member (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 INSERT INTO member VALUES (1,'张三','小三','18888888888','zs@163.com');
-DROP TABLE IF EXISTS order_traveller;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE order_traveller (
-  orderId int(11) auto_increment NOT NULL DEFAULT '0',
-  travellerId int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (orderId,travellerId),
-  KEY travellerId (travellerId),
-  CONSTRAINT order_traveller_ibfk_1 FOREIGN KEY (orderId) REFERENCES `orders` (id),
-  CONSTRAINT order_traveller_ibfk_2 FOREIGN KEY (travellerId) REFERENCES traveller (id)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO order_traveller VALUES (1,1);
-INSERT INTO order_traveller VALUES (2,1);
-INSERT INTO order_traveller VALUES (5,1);
-INSERT INTO order_traveller VALUES (7,1);
-INSERT INTO order_traveller VALUES (3,2);
-INSERT INTO order_traveller VALUES (4,2);
-INSERT INTO order_traveller VALUES (6,2);
-INSERT INTO order_traveller VALUES (8,2);
-INSERT INTO order_traveller VALUES (9,2);
 DROP TABLE IF EXISTS orders;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -96,6 +75,45 @@ INSERT INTO orders VALUES (6,'22222','2018-02-03 12:00:00',2,'没什么',0,1,2,1
 INSERT INTO orders VALUES (7,'33333','2020-08-23 15:05:22',2,'没什么',1,1,3,1);
 INSERT INTO orders VALUES (8,'44444','2020-08-23 15:05:22',2,'没什么',1,1,4,1);
 INSERT INTO orders VALUES (9,'55555','2020-08-23 15:05:22',2,'没什么',2,1,4,1);
+DROP TABLE IF EXISTS traveller;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE traveller (
+  id int(11) auto_increment NOT NULL,
+  `NAME` varchar(20) DEFAULT NULL,
+  sex varchar(20) DEFAULT NULL,
+  phoneNum varchar(20) DEFAULT NULL,
+  credentialsType int(11) DEFAULT NULL,
+  credentialsNum varchar(50) DEFAULT NULL,
+  travellerType int(11) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+INSERT INTO traveller VALUES (1,'张龙','男','13333333333',0,'123456789009876543',0);
+INSERT INTO traveller VALUES (2,'张小龙','男','15555555555',0,'987654321123456789',1);
+DROP TABLE IF EXISTS order_traveller;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE order_traveller (
+  orderId int(11) auto_increment NOT NULL DEFAULT '0',
+  travellerId int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (orderId,travellerId),
+  KEY travellerId (travellerId),
+  CONSTRAINT order_traveller_ibfk_1 FOREIGN KEY (orderId) REFERENCES `orders` (id),
+  CONSTRAINT order_traveller_ibfk_2 FOREIGN KEY (travellerId) REFERENCES traveller (id)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+INSERT INTO order_traveller VALUES (1,1);
+INSERT INTO order_traveller VALUES (2,1);
+INSERT INTO order_traveller VALUES (5,1);
+INSERT INTO order_traveller VALUES (7,1);
+INSERT INTO order_traveller VALUES (3,2);
+INSERT INTO order_traveller VALUES (4,2);
+INSERT INTO order_traveller VALUES (6,2);
+INSERT INTO order_traveller VALUES (8,2);
+INSERT INTO order_traveller VALUES (9,2);
 DROP TABLE IF EXISTS permission;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -166,23 +184,7 @@ CREATE TABLE role_permission (
 INSERT INTO role_permission VALUES (1,1111);
 INSERT INTO role_permission VALUES (2,1111);
 INSERT INTO role_permission VALUES (1,2222);
-DROP TABLE IF EXISTS traveller;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE traveller (
-  id int(11) auto_increment NOT NULL,
-  `NAME` varchar(20) DEFAULT NULL,
-  sex varchar(20) DEFAULT NULL,
-  phoneNum varchar(20) DEFAULT NULL,
-  credentialsType int(11) DEFAULT NULL,
-  credentialsNum varchar(50) DEFAULT NULL,
-  travellerType int(11) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO traveller VALUES (1,'张龙','男','13333333333',0,'123456789009876543',0);
-INSERT INTO traveller VALUES (2,'张小龙','男','15555555555',0,'987654321123456789',1);
 DROP TABLE IF EXISTS users;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
