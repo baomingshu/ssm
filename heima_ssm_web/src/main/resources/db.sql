@@ -96,7 +96,7 @@ DROP TABLE IF EXISTS order_traveller;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE order_traveller (
-  orderId int(11) auto_increment NOT NULL DEFAULT '0',
+  orderId int(11) NOT NULL DEFAULT '0',
   travellerId int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (orderId,travellerId),
   KEY travellerId (travellerId),
