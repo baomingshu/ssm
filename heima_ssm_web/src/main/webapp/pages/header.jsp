@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	<!--页面端权限控制 第一步导入依赖，第二步在这里 导入标签   第三步在jsp文件中使用标签 例如：authentication  ，  authorize-->
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!-- 页面头部 -->
 <header class="main-header">
 	<!-- Logo -->
@@ -22,7 +23,9 @@
 					class="dropdown-toggle" data-toggle="dropdown"> <img
 						src="${pageContext.request.contextPath}/img/user2-160x160.jpg"
 						class="user-image" alt="User Image"> <span class="hidden-xs">
-							xxx
+						
+						<!-- principal.username 是当前正在操作的用户 -->
+							<security:authentication property="principal.username"></security:authentication>
 					</span>
 
 				</a>

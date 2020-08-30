@@ -17,7 +17,7 @@ public class OrdersServiceImpl implements IOrdersService {
 	@Autowired
 	private IOrdersDao ordersDao;
 	@Override
-	public List<Orders> findAll(int page,int size) throws Exception {
+	public List<Orders> findAll(Integer page,Integer size) throws Exception {
 //		17行通过注解@Autowired创建了 IOrdersDao类的对象，ordersDao调用了findAll
 //		PageHelper是在pom.xml文件中引用Jay包，在applicationContext.xml文件36行中配置后才能使用的
 //		调用startPage方法,开始分页，这里的参数是cotroller层通过请求得到前端的参数page和size

@@ -18,7 +18,7 @@ import com.itheima.ssm.domain.Role;
 import com.itheima.ssm.domain.UserInfo;
 import com.itheima.ssm.service.IUserService;
 
-//   给这个bean指定一个名字，在spring-security.xml文件的第43行就可以找到了， <security:authentication-provider user-service-ref="userService">
+//   ("userService")给这个bean指定一个名字，在spring-security.xml文件的第43行就可以找到了， <security:authentication-provider user-service-ref="userService">
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements IUserService{
@@ -27,6 +27,8 @@ public class UserServiceImpl implements IUserService{
 	private IUserDao userDao;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	
+	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -78,6 +80,23 @@ public class UserServiceImpl implements IUserService{
 	        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
 	        userDao.save(userInfo);
 	    }
+
+	@Override
+	public List<Role> findOtherRoles(String userId) {
+		
+		return userDao.findOtherRoles(userId);
+	}
+
+	
+	@Override
+    public void addRoleToUser(String userId, String[] roleIds) {
+
+        for(String roleId:roleIds){
+            userDao.addRoleToUser(userId,roleId);
+           
+        }
+
+    }
 
 
 

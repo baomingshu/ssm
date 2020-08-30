@@ -3,6 +3,7 @@ package com.itheima.ssm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,8 +38,10 @@ public class OrdersController {
 	//接下来使用@RequestParam，请求得到前端的参数page和size,
 	// 建立ModelAndView的对象，他调用mv.addObject();，mv.setViewName();两个方法。
 	@RequestMapping("/findAll.do")
-	public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") int page,
-			@RequestParam(name = "size", required = true, defaultValue = "4") int size) throws Exception {
+//	spring提供的Secured配置的注解，先在spring-security配置，在这里使用注解，，效果：只有ROLE_ADMIN角色可以访问.注意：与jsr250注解方式的区别：ROLE_前缀，secured不用导入
+	@Secured("ROLE_ADMIN")
+	public ModelAndView findAll(@RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
+			@RequestParam(name = "size", required = true, defaultValue = "4") Integer size) throws Exception {
 		ModelAndView mv = new ModelAndView();
 //		第20行使用了autowired注解方式创建了对象，在这里调用了service的finAll方法,拿到了orders表的所有数据
 		List<Orders> ordersList = ordersService.findAll(page, size);
@@ -73,3 +76,33 @@ public class OrdersController {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

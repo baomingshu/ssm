@@ -2,6 +2,8 @@ package com.itheima.ssm.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,8 @@ public class ProductController {
 	}
 //	全部产品查询
 	@RequestMapping("/findAll.do")
+//	spring提供的jsr250配置的注解，先在spring-security配置，在pom导入依赖，在这里使用注解，，效果：只有ADMIN角色可以访问.注意：与secured注解方式的区别：ROLE_前缀,secured不用导入
+	@RolesAllowed("ADMIN")
 	public ModelAndView findAll() throws Exception{
 		// ModelAndView是一个类，他的对象可以调用mv.addObject();，mv.setViewName();两个方法。
 		

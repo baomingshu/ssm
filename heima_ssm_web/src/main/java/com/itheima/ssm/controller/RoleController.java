@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.itheima.ssm.domain.Permission;
 import com.itheima.ssm.domain.Role;
 import com.itheima.ssm.domain.UserInfo;
 import com.itheima.ssm.service.IRoleService;
@@ -19,6 +20,30 @@ public class RoleController {
 	@Autowired
 	private IRoleService roleService;
 
+	  //给角色添加权限
+    @RequestMapping("/addPermissionToRole.do")
+    public String addRoleToUser(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "ids", required = true) String[] permissionIds) {
+    	roleService.addPermissionToRole(roleId, permissionIds);
+        return "redirect:findAll.do";
+    }
+    
+//	查询用户以及用户可以添加的角色
+	@RequestMapping("/findRoleByIdAndAllPermission.do")
+	public ModelAndView findRoleByIdAndAllPermission(@RequestParam(name="id",required=true)String roleId) throws Exception{
+		ModelAndView mv = new ModelAndView();
+//		根据角色id 查询用户
+		Role ro = roleService.findById(roleId);
+//		 根据角色id 查询可以添加的权限
+		List<Permission> permissionList =roleService.findOtherPermssion(roleId);
+		mv.addObject("role",ro);
+		mv.addObject("permissionList",permissionList);
+		mv.setViewName("role-permission-add");
+		return mv;
+	}
+	
+	
+	
+//	用户添加
     @RequestMapping("/save.do")
     public String save(Role role) throws Exception {
     	roleService.save(role);
